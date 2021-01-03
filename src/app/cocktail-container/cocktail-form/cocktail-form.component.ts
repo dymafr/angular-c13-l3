@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { CocktailService } from "../../shared/services/cocktail.service";
 
 @Component({
   selector: "app-cocktail-form",
@@ -13,7 +14,10 @@ export class CocktailFormComponent implements OnInit {
     return this.cocktailForm.get("ingredients") as FormArray;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private cocktailService: CocktailService
+  ) {}
 
   ngOnInit() {
     this.cocktailForm = this.fb.group({
