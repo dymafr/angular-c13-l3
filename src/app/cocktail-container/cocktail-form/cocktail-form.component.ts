@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 import { CocktailService } from "../../shared/services/cocktail.service";
 
 @Component({
@@ -16,7 +17,9 @@ export class CocktailFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private cocktailService: CocktailService
+    private cocktailService: CocktailService,
+    public router: Router,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -38,6 +41,7 @@ export class CocktailFormComponent implements OnInit {
   }
 
   public submit(): void {
-    console.log(this.cocktailForm);
+    this.cocktailService.addCocktail(this.cocktailForm.value);
+    this.router.navigate([".."], { relativeTo: this.activatedRoute });
   }
 }
